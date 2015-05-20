@@ -1,0 +1,32 @@
+{
+  "name": "contacts-api",
+  "version": "1.0.0",
+  "description": "A simple contacts api server, for practice.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjm-practice/contacts-bookshelf-hapi.git"
+  },
+  "keywords": [
+    "node",
+    "hapi",
+    "bookshelf",
+    "knex"
+  ],
+  "author": "Steve (following Kirt Henrie's tutorial)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sjm-practice/contacts-bookshelf-hapi/issues"
+  },
+  "homepage": "https://github.com/sjm-practice/contacts-bookshelf-hapi#readme",
+  "dependencies": {
+    "bookshelf": "^0.8.1",
+    "hapi": "^8.4.0",
+    "knex": "^0.8.5",
+    "moment": "^2.10.3",
+    "sqlite3": "^3.0.8"
+  }
+}

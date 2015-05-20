@@ -24,4 +24,7 @@ This application was written from scratch, following a tutorial provided by Kirt
     - then went off did some other refactoring
     - then came back and completed the controller refactor (assigned routes.config to the relocated controllers)
     - Actually did the same thing with routes (moved routes, did other stuff, then came back and appropriately assigned routes to server) 
+<<<<<<< HEAD
 * At least at the point of completing the hapi refactor in part two, unnecessarily requires server in routes.js
+=======
+>>>>>>> 8dda116419bb564342e53558349b18e9ed6db28e

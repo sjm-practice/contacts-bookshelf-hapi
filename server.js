@@ -9,8 +9,10 @@ server.connection({ port: config.port });
 
 server.route(routes);
 
-server.start(function () {
-  console.log('Server running at:', server.info.uri);
-});
+if (!module.parent) {
+  server.start(function () {
+    console.log('Server running at:', server.info.uri);
+  });
+}
 
 module.exports = server;

@@ -38,7 +38,7 @@ after(function (done) {
 
 describe('Contacts API', function() {
 
-  it(' lists all contacts', function (done) {
+  it('lists all contacts', function (done) {
     var options = {
       method: 'GET',
       url: '/api/contacts'
@@ -58,7 +58,7 @@ describe('Contacts API', function() {
     });
   });
 
-  it(' lists a single contact, when given an id', function (done) {
+  it('lists a single contact, when given an id', function (done) {
     var options = {
       method: 'GET',
       url: '/api/contacts/1'
@@ -80,5 +80,29 @@ describe('Contacts API', function() {
       done();
     });
   });
+
+  var localContact = {
+    contact: {
+      first_name: 'Jack',
+      middle_initial: undefined,
+      last_name: 'Johnson',
+      title: 'President',
+      email: 'jjohnson@test.net',
+      phone_number: '(555) 222-2034',
+      street_address: '123 Some Street',
+      city: 'Pittsburgh',
+      state: 'PA',
+      zip_code: '11223',
+    }
+  };
+
+  // it('creates a contact', function (done) {
+    // var options = {
+    //   method: 'POST',
+    //   url: '/api/contacts',
+    //   payload: JSON.stringify(localContact)
+    // };
+
+  // });
 
 });

@@ -9,9 +9,20 @@ module.exports = {
       });
     }
   },
+
   contact: {
     handler: function (request, reply) {
       new models.Contact({id: request.params.id}).fetch().then(function(contact) {
+        reply(utils.formatJson('contact', contact));
+      });
+    }
+  },
+
+  contactCreate: {
+    handler: function (request, reply) {
+      request.payload.contact.created_at = new Date();
+      request.payload.contact.updated_at = new Date();
+      new models.Contact(request.payload.contact).save().then(function (contact) {
         reply(utils.formatJson('contact', contact));
       });
     }

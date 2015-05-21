@@ -10,4 +10,10 @@ module.exports = [{
   method: 'GET',
   path: '/api/contacts/{id}',
   config: controllers.contact
+}, {
+  method: 'POST',
+  path: '/api/contacts',
+  config: controllers.contactCreate
 }];
+
+

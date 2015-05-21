@@ -5,7 +5,8 @@ process.env.NODE_ENV = 'test';
 var expect = require('chai').expect,
   Lab = require('lab'),
   server = require('../server'),
-  bookshelf = require('../config/bookshelf');
+  bookshelf = require('../config/bookshelf'),
+  moment = require('moment');
 
 var lab = exports.lab = Lab.script();
 
@@ -96,13 +97,52 @@ describe('Contacts API', function() {
     }
   };
 
-  // it('creates a contact', function (done) {
-    // var options = {
-    //   method: 'POST',
-    //   url: '/api/contacts',
-    //   payload: JSON.stringify(localContact)
-    // };
+  it('creates a contact, response is correct', function (done) {
+    var options = {
+      method: 'POST',
+      url: '/api/contacts',
+      payload: JSON.stringify(localContact)
+    };
 
-  // });
+    server.inject(options, function (response) {
+      var result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      var contact = JSON.parse(result);
+      expect(contact).to.be.instanceOf(Object);
+      expect(contact.contact.first_name).to.equal(localContact.contact.first_name);
+      expect(contact.contact.middle_initial).to.equal(undefined);
+      expect(contact.contact.last_name).to.equal(localContact.contact.last_name);
+      expect(contact.contact.phone_number).to.equal(localContact.contact.phone_number);
+
+      var created = moment(contact.contact.created_at);
+      var updated = moment(contact.contact.updated_at);
+
+      expect(created.isValid()).to.equal(true);
+      expect(updated.isValid()).to.equal(true);
+
+      done();
+    });
+  });
+
+  it('persists newly created contact', function (done) {
+    var options = {
+      method: 'GET',
+      url: '/api/contacts'
+    };
+
+    server.inject(options, function (response) {
+      var result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+
+      var contacts = JSON.parse(result);
+      expect(contacts).to.be.instanceOf(Object);
+      expect(contacts.contacts).to.be.instanceOf(Array);
+      expect(contacts.contacts).to.have.length(3);
+
+      done();
+    });
+  });
 
 });

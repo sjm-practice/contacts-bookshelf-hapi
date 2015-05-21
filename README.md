@@ -11,7 +11,7 @@ This application was written from scratch, following a tutorial provided by Kirt
 * A deviation, I moved routes.js from ./config to ./routes (I created that folder)
 
 ## Tutorial Feedback
-* I don't beleive the steps 'run bower install && npm install' in the client directory were listed (but needed) in the tutorial.
+* I don't believe the steps 'run bower install && npm install' in the client directory were listed in the tutorial, but are needed.
     - when following subsequent tutorial steps, needed components were not installed (and explicit error message was posted, to run bower install)
 * During the step to create ember contact route (ember g resource contact), the process asks whether to overwrite client/app/models/contact.js (the tutorial didn't state what to do, I chose to not overwrite)
 * Tutorial typo, during hapi refactor (part 2)

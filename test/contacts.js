@@ -71,11 +71,11 @@ describe('Contacts API', function() {
 
       var contact = JSON.parse(result);
       expect(contact).to.be.instanceOf(Object);
-      expect(contact.contact['first_name']).to.equal('Joe');
-      expect(contact.contact['middle_initial']).to.equal(null);
-      expect(contact.contact['last_name']).to.equal('Smith');
-      expect(contact.contact['created_at']).to.not.equal(null);
-      expect(contact.contact['updated_at']).to.not.equal(null);
+      expect(contact.contact.first_name).to.equal('Joe');
+      expect(contact.contact.middle_initial).to.equal(null);
+      expect(contact.contact.last_name).to.equal('Smith');
+      expect(contact.contact.created_at).to.not.equal(null);
+      expect(contact.contact.updated_at).to.not.equal(null);
 
       done();
     });

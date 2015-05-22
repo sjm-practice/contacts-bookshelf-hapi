@@ -97,7 +97,7 @@ describe('Contacts API', function() {
     }
   };
 
-  it('creates a contact, response is correct', function (done) {
+  it('creates a contact, response is created record object', function (done) {
     var options = {
       method: 'POST',
       url: '/api/contacts',
@@ -110,6 +110,10 @@ describe('Contacts API', function() {
       expect(response.statusCode).to.equal(200);
       var contact = JSON.parse(result);
       expect(contact).to.be.instanceOf(Object);
+
+      // save this new contact for a subsequent test
+      localContact = contact;
+
       expect(contact.contact.first_name).to.equal(localContact.contact.first_name);
       expect(contact.contact.middle_initial).to.equal(undefined);
       expect(contact.contact.last_name).to.equal(localContact.contact.last_name);
@@ -125,10 +129,10 @@ describe('Contacts API', function() {
     });
   });
 
-  it('persists newly created contact', function (done) {
+  it('persisted newly created contact', function (done) {
     var options = {
       method: 'GET',
-      url: '/api/contacts'
+      url: '/api/contacts/' + localContact.contact.id
     };
 
     server.inject(options, function (response) {
@@ -136,13 +140,69 @@ describe('Contacts API', function() {
 
       expect(response.statusCode).to.equal(200);
 
-      var contacts = JSON.parse(result);
-      expect(contacts).to.be.instanceOf(Object);
-      expect(contacts.contacts).to.be.instanceOf(Array);
-      expect(contacts.contacts).to.have.length(3);
+      var contact = JSON.parse(result);
+      expect(contact).to.be.instanceOf(Object);
+      expect(contact.contact.first_name).to.equal(localContact.contact.first_name);
+      // note, once record is persisted, the previously unassigned middle_initial is null (not undefined)
+      expect(contact.contact.middle_initial).to.equal(null);
+      expect(contact.contact.last_name).to.equal(localContact.contact.last_name);
+      expect(contact.contact.phone_number).to.equal(localContact.contact.phone_number);
+
+      var created = moment(contact.contact.created_at);
+      var updated = moment(contact.contact.updated_at);
+
+      expect(created.isValid()).to.equal(true);
+      expect(updated.isValid()).to.equal(true);
 
       done();
     });
   });
 
+  it('updates a contact, response is updated record ', function (done) {
+    // modify some data of the last created contact
+    localContact.contact.first_name = 'Billy';
+    localContact.contact.last_name = 'Smith';
+    localContact.contact.phone_number = '(555) 111-2222';
+
+    var options = {
+      method: 'PUT',
+      url: '/api/contacts/' + localContact.contact.id,
+      payload: JSON.stringify(localContact)
+    };
+
+    server.inject(options, function (response) {
+      var result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      var contact = JSON.parse(result);
+      expect(contact).to.be.instanceOf(Object);
+      expect(contact.contact.first_name).to.equal(localContact.contact.first_name);
+      expect(contact.contact.last_name).to.equal(localContact.contact.last_name);
+      expect(contact.contact.phone_number).to.equal(localContact.contact.phone_number);
+
+      var created = moment(contact.contact.created_at);
+      var updated = moment(contact.contact.updated_at);
+
+      expect(created.isValid()).to.equal(true);
+      expect(updated.isValid()).to.equal(true);
+
+      var now = moment();
+
+      // expect the create time to be earlier than now
+      expect(now.isAfter(created)).to.equal(true);
+      expect(updated.isAfter(created)).to.equal(true);
+
+      done();
+    });
+  });
 });
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,8 @@ module.exports = [{
   method: 'POST',
   path: '/api/contacts',
   config: controllers.contactCreate
+}, {
+  method: 'PUT',
+  path: '/api/contacts/{id}',
+  config: controllers.contactUpdate
 }];
-
-

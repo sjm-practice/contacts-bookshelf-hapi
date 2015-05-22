@@ -26,5 +26,15 @@ module.exports = {
         reply(utils.formatJson('contact', contact));
       });
     }
+  },
+
+  contactUpdate: {
+    handler: function (request, reply) {
+  console.log('update contact route found');
+      request.payload.contact.updated_at = new Date();
+      new models.Contact(request.payload.contact).save().then(function (contact) {
+        reply(utils.formatJson('contact', contact));
+      });
+    }
   }
 };

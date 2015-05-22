@@ -195,6 +195,44 @@ describe('Contacts API', function() {
       done();
     });
   });
+
+  it('delete contact response is empty', function (done) {
+    var options = {
+      method: 'DELETE',
+      url: '/api/contacts/' + localContact.contact.id,
+      payload: JSON.stringify(localContact)
+    };
+
+    server.inject(options, function (response) {
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.equal('{}');
+
+      done();
+    });
+  });
+
+  it('deletes the contact record', function (done) {
+    var options = {
+      method: 'GET',
+      url: '/api/contacts'
+    };
+
+    server.inject(options, function (response) {
+      expect(response.statusCode).to.equal(200);
+
+      var contacts = JSON.parse(response.result);
+      expect(contacts).to.be.instanceOf(Object);
+      expect(contacts.contacts).to.be.instanceOf(Array);
+
+      // Verify the deleted contact does not exist
+      var deletedRecords = contacts.contacts.filter(function (contact) {
+        return contact.id === localContact.contact.id;
+      });
+      expect(deletedRecords).to.have.length(0);
+
+      done();
+    });
+  });
 });
 
 

@@ -18,4 +18,8 @@ module.exports = [{
   method: 'PUT',
   path: '/api/contacts/{id}',
   config: controllers.contactUpdate
+}, {
+  method: 'DELETE',
+  path: '/api/contacts/{id}',
+  config: controllers.contactDelete
 }];

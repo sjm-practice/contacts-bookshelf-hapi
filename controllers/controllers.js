@@ -30,10 +30,17 @@ module.exports = {
 
   contactUpdate: {
     handler: function (request, reply) {
-  console.log('update contact route found');
       request.payload.contact.updated_at = new Date();
       new models.Contact(request.payload.contact).save().then(function (contact) {
         reply(utils.formatJson('contact', contact));
+      });
+    }
+  },
+
+  contactDelete: {
+    handler: function (request, reply) {
+      new models.Contact(request.params).destroy().then(function (contact) {
+        reply(JSON.stringify(contact));
       });
     }
   }

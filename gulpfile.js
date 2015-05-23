@@ -14,6 +14,7 @@ var paths = {
     './models/**/*.js',
     './routes/**/*.js',
     './test/**/*.js',
+    './validations/**/*.js',
     './utils/**/*.js'
   ]
 };

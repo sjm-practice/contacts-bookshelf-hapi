@@ -173,12 +173,17 @@ describe('Contacts API', function() {
     server.inject(options, function (response) {
       var result = response.result;
 
+      if (response.statusCode !== 200) {
+        console.log('\nupdate result:\n', result); // will explain validation failure
+      }
       expect(response.statusCode).to.equal(200);
       var contact = JSON.parse(result);
       expect(contact).to.be.instanceOf(Object);
       expect(contact.contact.first_name).to.equal(localContact.contact.first_name);
       expect(contact.contact.last_name).to.equal(localContact.contact.last_name);
       expect(contact.contact.phone_number).to.equal(localContact.contact.phone_number);
+      expect(contact.contact.created_at).to.equal(localContact.contact.created_at);
+      expect(contact.contact.updated_at).to.not.equal(localContact.contact.updated_at);
 
       var created = moment(contact.contact.created_at);
       var updated = moment(contact.contact.updated_at);

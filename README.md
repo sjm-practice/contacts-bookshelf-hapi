@@ -26,3 +26,5 @@ This application was written from scratch, following a tutorial provided by Kirt
     - Actually did the same thing with routes (moved routes, did other stuff, then came back and appropriately assigned routes to server) 
 * At least at the point of completing the hapi refactor in part two, unnecessarily requires server in routes.js
 * Part 3, Creates a contact record setting middle initial to undefined, the test compares the response middle initial to null (which fails)
+* Part 3, Validation - says to create file validations/validations.js, but later refers to file as validators/validators.js 
+* 

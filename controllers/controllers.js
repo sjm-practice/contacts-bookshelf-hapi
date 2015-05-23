@@ -1,4 +1,5 @@
 var models = require('../models/models'),
+  validators = require('../validators/validators'),
   utils = require('../utils/utils');
 
 module.exports = {
@@ -25,6 +26,9 @@ module.exports = {
       new models.Contact(request.payload.contact).save().then(function (contact) {
         reply(utils.formatJson('contact', contact));
       });
+    },
+    validate: {
+      payload: validators
     }
   },
 
@@ -34,6 +38,9 @@ module.exports = {
       new models.Contact(request.payload.contact).save().then(function (contact) {
         reply(utils.formatJson('contact', contact));
       });
+    },
+    validate: {
+      payload: validators
     }
   },
 

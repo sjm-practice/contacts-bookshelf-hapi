@@ -1,4 +1,4 @@
-# contacts-ember-hapi
+# contacts-bookshelf-hapi
 This is a contacts application written for practice, based on a tutorial, using ember, node, hapi, and bookshelf.
 
 This application was written from scratch, following a tutorial provided by Kirt Henrie. (http://blog.optimalcadence.com/building-an-application-with-ember-cli-hapi-bookshelf-knex-js-sqlite3-part-1/)
